@@ -6,6 +6,7 @@ import { useNotification } from '../context/NotificationContext';
 import { orderService } from '../services/orderService';
 import { getErrorMessage } from '../services/api';
 import { Loader } from '../components/common/Loader';
+import { formatPrice } from '../utils/productHelpers'; // adaptez le chemin si besoin
 import styles from './CheckoutPage.module.css';
 
 /* ---------- Petits composants d'icônes (SVG inline) ---------- */
@@ -194,7 +195,7 @@ export default function CheckoutPage() {
   if (cartLoading) return <Loader fullPage />;
   if (!cart?.items?.length) return null;
 
-  const total = Number(cart.total).toFixed(2);
+  const total = formatPrice(cart.total);
 
   return (
     <div className={`container page ${styles.page}`}>
@@ -247,9 +248,9 @@ export default function CheckoutPage() {
                 </div>
               </form>
 
-              <button type="button" className={styles.back} onClick={() => navigate('/cart')}>
+             {/*  <button type="button" className={styles.back} onClick={() => navigate('/cart')}>
                 <ArrowLeft /> Retour au panier
-              </button>
+              </button> */}
             </>
           ) : (
             <>
@@ -345,9 +346,9 @@ export default function CheckoutPage() {
                 })}
               </form>
 
-              <button type="button" className={styles.back} onClick={() => setStep('shipping')}>
+              {/* <button type="button" className={styles.back} onClick={() => setStep('shipping')}>
                 <ArrowLeft /> Retour à la livraison
-              </button>
+              </button> */}
             </>
           )}
         </section>
@@ -370,7 +371,7 @@ export default function CheckoutPage() {
                   <strong>{item.product.name}</strong>
                   <small>Quantité : {item.quantity}</small>
                 </div>
-                <span className={styles.itemPrice}>{Number(item.subtotal).toFixed(2)} €</span>
+                <span className={styles.itemPrice}>{formatPrice(item.subtotal)}</span>
               </div>
             ))}
           </div>
@@ -378,7 +379,7 @@ export default function CheckoutPage() {
           <div className={styles.lines}>
             <div>
               <span>Sous-total</span>
-              <span>{total} €</span>
+              <span>{total}</span>
             </div>
             <div>
               <span>Livraison</span>
@@ -388,7 +389,7 @@ export default function CheckoutPage() {
 
           <div className={styles.total}>
             <span>Total</span>
-            <strong>{total} €</strong>
+            <strong>{total}</strong>
           </div>
 
           <ul className={styles.guarantees}>

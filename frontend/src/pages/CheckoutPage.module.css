@@ -2,6 +2,8 @@
 .page {
   --co-blue: #1d5fd8;
   --co-blue-soft: #f3f7ff;
+  --co-brand: #5b4ef0; /* violet du bouton « Passer commande » */
+  --co-brand-hover: #4a3ed6;
   --co-ink: #0f1b33;
   --co-muted: #5b6678;
   --co-line: #e3e8ef;
@@ -210,21 +212,24 @@
   grid-column: 1 / -1;
 }
 
-/* Retour */
+/* Retour (même style que le bouton « Passer commande ») */
 .back {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-top: 28px;
-  background: none;
+  padding: 12px 28px;
   border: 0;
-  padding: 0;
-  color: var(--co-blue);
-  font-weight: 500;
+  border-radius: 999px;
+  background: var(--co-brand);
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.15s;
 }
 .back:hover {
-  text-decoration: underline;
+  background: var(--co-brand-hover);
+  text-decoration: none;
 }
 
 /* ---------- Récapitulatif ---------- */
@@ -274,6 +279,7 @@
 .itemPrice {
   font-weight: 600;
   padding-top: 6px;
+  white-space: nowrap;
 }
 .lines > div {
   display: flex;
@@ -322,16 +328,18 @@
 .guarantees small {
   color: var(--co-muted);
 }
+
+/* Bouton principal (même style que « Passer commande ») */
 .pay {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 18px;
+  padding: 16px;
   border: 0;
-  border-radius: 8px;
-  background: var(--co-blue);
+  border-radius: 999px;
+  background: var(--co-brand);
   color: #fff;
   font-size: 1.05rem;
   font-weight: 700;
@@ -339,7 +347,7 @@
   transition: background 0.15s;
 }
 .pay:hover:not(:disabled) {
-  background: #174cb0;
+  background: var(--co-brand-hover);
 }
 .pay:disabled {
   opacity: 0.65;
